@@ -14,6 +14,9 @@ class Place(models.Model):
     lng = models.FloatField(verbose_name='Долгота', default=0.0, blank=True)
     lat = models.FloatField(verbose_name='Широта', default=0.0, blank=True)
 
+    class Meta(object):
+        ordering = ['id']
+
     def __str__(self):
         return self.title
 
@@ -25,7 +28,12 @@ class ImagesPlace(models.Model):
     image = models.ImageField(
         upload_to='', null=True, blank=True, verbose_name='Изображение'
     )
-    index_number = models.IntegerField(default=1, verbose_name='№ п/п')
+    index_number = models.PositiveIntegerField(
+        default=0, blank=False, null=False, verbose_name='№ п/п'
+    )
+
+    class Meta(object):
+        ordering = ['index_number']
 
     def __str__(self):
         return f'{self.index_number}. {self.place}'
