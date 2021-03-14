@@ -6,3 +6,4 @@
 staticfiles
 *.jpg
 *.txt
+!requirements.txt
