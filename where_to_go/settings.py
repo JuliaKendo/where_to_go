@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import sys
 from environs import Env
 from pathlib import Path
 
@@ -29,7 +29,7 @@ SECRET_KEY = env.str(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DEBUG', True)
+DEBUG = env.bool('DEBUG', False)
 
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', [])
 
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': env.list('DATABASE_FILE', str(BASE_DIR / 'where_to_go.sqlite3')),
+        'NAME': env.str('DATABASE_FILE', str(BASE_DIR / 'where_to_go.sqlite3')),
     }
 }
 
@@ -127,9 +127,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+
+if sys.argv[1] != 'runserver':
+    STATIC_ROOT = BASE_DIR / 'static'
+else:
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static',
+    ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
