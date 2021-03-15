@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'where_to_go.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
+print(env.str('DATABASE_FILE', BASE_DIR / 'where_to_go.sqlite3'))
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': env.str('DATABASE_FILEPATH', BASE_DIR / 'db.sqlite3'),
+        'NAME': env.str('DATABASE_FILE', BASE_DIR / 'where_to_go.sqlite3'),
     }
 }
 
