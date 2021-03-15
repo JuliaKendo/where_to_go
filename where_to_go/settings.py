@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-import sys
+
 from environs import Env
 from pathlib import Path
 
@@ -128,12 +128,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-if sys.argv[1] != 'runserver':
-    STATIC_ROOT = BASE_DIR / 'static'
-else:
+if DEBUG:
     STATICFILES_DIRS = [
         BASE_DIR / 'static',
     ]
+else:
+    STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
