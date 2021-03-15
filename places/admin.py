@@ -15,6 +15,7 @@ class ImagesPlaceInLine(SortableInlineAdminMixin, admin.TabularInline):
 
 class PlaceAdmin(admin.ModelAdmin):
     inlines = [ImagesPlaceInLine]
+    search_fields = ['title']
 
 
 # Register your models here.
