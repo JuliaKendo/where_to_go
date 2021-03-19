@@ -35,8 +35,7 @@ def get_features(place):
 def index(request):
     places = Place.objects.all()
     return render(
-        request, 'index.html',
-        {
+        request, 'index.html', {
             'places': {
                 "type": "FeatureCollection",
                 "features": [get_features(place) for place in places]
