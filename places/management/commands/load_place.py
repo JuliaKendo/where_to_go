@@ -3,7 +3,7 @@ import requests
 from django.db.models import Max
 from django.core.files.base import ContentFile
 from django.core.management import BaseCommand, CommandError
-from places.models import Place, ImagesPlace
+from places.models import Place
 
 
 class Command(BaseCommand):
@@ -44,7 +44,7 @@ def handle_images(place, images):
         file_name = os.path.basename(image_path)
         response = requests.get(image_path)
         response.raise_for_status()
-        image_entry, create = ImagesPlace.objects.filter(
+        image_entry, create = place.images.filter(
             image__icontains=file_name
         ).get_or_create(place=place)
         if create:
@@ -54,7 +54,6 @@ def handle_images(place, images):
 
 
 def get_index_number(place):
-    max_num_entry = ImagesPlace.objects.filter(
-        place=place
-    ).aggregate(Max('index_number'))['index_number__max']
+    max_num_entry = \
+        place.images.aggregate(Max('index_number'))['index_number__max']
     return max_num_entry + 1
