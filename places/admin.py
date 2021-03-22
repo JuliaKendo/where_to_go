@@ -21,6 +21,10 @@ class PlaceAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
 
+class ImagesPlaceAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['place']
+
+
 # Register your models here.
 admin.site.register(Place, PlaceAdmin)
-admin.site.register(ImagesPlace)
+admin.site.register(ImagesPlace, ImagesPlaceAdmin)
