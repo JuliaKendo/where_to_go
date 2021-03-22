@@ -29,7 +29,7 @@ class ImagesPlace(models.Model):
         upload_to='', verbose_name='Изображение'
     )
     index_number = models.PositiveIntegerField(
-        default=0, blank=False, null=False, verbose_name='№ п/п'
+        default=0, verbose_name='№ п/п'
     )
 
     class Meta(object):
