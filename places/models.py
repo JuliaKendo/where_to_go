@@ -26,7 +26,7 @@ class ImagesPlace(models.Model):
         Place, on_delete=models.CASCADE, verbose_name='Место'
     )
     image = models.ImageField(
-        upload_to='', null=True, blank=True, verbose_name='Изображение'
+        upload_to='', verbose_name='Изображение'
     )
     index_number = models.PositiveIntegerField(
         default=0, blank=False, null=False, verbose_name='№ п/п'
