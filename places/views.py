@@ -6,11 +6,9 @@ from .models import Place
 
 
 def get_features(place):
-    images = []
-    if place.images.count():
-        images = get_list_or_404(
-            place.images.order_by('index_number')
-        )
+    images = get_list_or_404(
+        place.images.order_by('index_number')
+    )
     return {
         "type": "Feature",
         "geometry": {
