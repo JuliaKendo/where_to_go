@@ -1,14 +1,12 @@
 from django.http import JsonResponse
 from django.shortcuts import (
-    render, get_object_or_404, get_list_or_404
+    render, get_object_or_404
 )
 from .models import Place
 
 
 def get_features(place):
-    images = get_list_or_404(
-        place.images.order_by('index_number')
-    )
+    images = list(place.images.order_by('index_number'))
     return {
         "type": "Feature",
         "geometry": {
